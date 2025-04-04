@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = file("../terraform-key.json")
+  credentials = file("terraform-key.json")
   project     = var.project_id
   region      = var.region
   zone        = var.zone
@@ -11,7 +11,7 @@ resource "google_compute_instance" "devops-vm" {
 
   boot_disk {
     initialize_params {
-      image = var.image
+      image = "ubuntu-os-cloud/ubuntu-2004-lts"
     }
   }
 
@@ -30,6 +30,6 @@ resource "google_compute_instance" "devops-vm" {
   EOT
 }
 
-output "vm_ip" {
-  value = google_compute_instance.devops-vm.network_interface[0].access_config[0].nat_ip
-}
+# output "vm_ip" {
+#   value = google_compute_instance.devops-vm.network_interface[0].access_config[0].nat_ip
+# }
