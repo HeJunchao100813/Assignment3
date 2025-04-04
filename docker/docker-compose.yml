@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - NEW_RELIC_LICENSE_KEY=your_newrelic_license_key
+      - NEW_RELIC_APP_NAME=SecureBackend
+    depends_on:
+      - elasticsearch
+
+  frontend:
+    image: nginx
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    ports:
+      - "80:80"
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.0
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
