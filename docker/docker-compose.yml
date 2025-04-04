@@ -6,7 +6,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - NEW_RELIC_LICENSE_KEY=your_newrelic_license_key
+      - NEW_RELIC_LICENSE_KEY=e21aab41d5b1142e735c519e889cd4d3FFFFNRAL
       - NEW_RELIC_APP_NAME=SecureBackend
     depends_on:
       - elasticsearch
